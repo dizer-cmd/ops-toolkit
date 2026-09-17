@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0105",
+  "category": "data_or_privacy",
+  "severity": "critical",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "data_incident_process",
+  "needs_human_review": true,
+  "review_reasons": [
+    "possible_data_breach"
+  ],
+  "summary": "A letter containing [PERSON_1]'s date of birth and National Insurance number was delivered to the wrong address and read by a third party. Possible personal data breach — start the incident process today."
+}

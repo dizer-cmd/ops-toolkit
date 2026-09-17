@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0106",
+  "category": "process_complaint",
+  "severity": "high",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "escalate_senior",
+  "needs_human_review": true,
+  "review_reasons": [
+    "complaint_about_complaints_process"
+  ],
+  "summary": "[PERSON_1]'s earlier complaint was never acknowledged and she is being asked to resubmit. Do not route this back into the same process."
+}

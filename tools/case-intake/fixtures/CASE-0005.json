@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0005",
+  "case_type": "chase",
+  "priority": "P1",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "safeguarding",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "vulnerability_indicated"
+  ],
+  "summary": "[PERSON_1] is recently bereaved and distressed, and is asking whether the claim closes if she does not reply by the date on the letter."
+}

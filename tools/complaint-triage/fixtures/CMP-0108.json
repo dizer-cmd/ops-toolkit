@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0108",
+  "category": "outcome_dispute",
+  "severity": "high",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": true,
+  "next_action": "acknowledge_and_investigate",
+  "needs_human_review": true,
+  "review_reasons": [
+    "redress_sought"
+  ],
+  "summary": "[PERSON_1] disputes the decision, says the consultant's report was not read properly, and is asking for two unpaid days off work to be reimbursed."
+}

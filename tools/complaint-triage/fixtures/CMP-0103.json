@@ -1,0 +1,15 @@
+{
+  "complaint_id": "CMP-0103",
+  "category": "unclear",
+  "severity": "high",
+  "vulnerability_indicated": true,
+  "regulated_clock_started": false,
+  "redress_sought": false,
+  "next_action": "safeguarding_referral",
+  "needs_human_review": true,
+  "review_reasons": [
+    "vulnerability_indicated",
+    "third_party_authority_unverified"
+  ],
+  "summary": "[PERSON_1] writes for his brother, who has a learning disability, is anxious and has stopped opening post. Power of attorney asserted; verify before redirecting correspondence."
+}

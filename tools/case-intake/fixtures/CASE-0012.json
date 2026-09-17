@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0012",
+  "case_type": "unclear",
+  "priority": "P3",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "intake_team",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "non_english_content"
+  ],
+  "summary": "Correspondence from [PERSON_1] is not in English and asks for contact in Polish. Route for translation; do not act on a guess."
+}

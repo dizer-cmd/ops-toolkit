@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0006",
+  "case_type": "out_of_scope",
+  "priority": "P4",
+  "client_ref_present": false,
+  "stated_deadline": null,
+  "routing_queue": "return_to_sender",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "out_of_scope_requires_confirmation"
+  ],
+  "summary": "Boiler warranty enquiry from [PERSON_1]. Not this organisation's business; confirm before returning the correspondence."
+}

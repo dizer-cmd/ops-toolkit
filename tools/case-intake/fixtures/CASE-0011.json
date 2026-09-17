@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0011",
+  "case_type": "new_claim",
+  "priority": "P3",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "intake_team",
+  "missing_information": [
+    "claimant_contact_details"
+  ],
+  "needs_human_review": false,
+  "review_reasons": [],
+  "summary": "New workplace injury claim from [PERSON_1], incident 12 August 2026, medical note supplied. No contact details in this submission."
+}

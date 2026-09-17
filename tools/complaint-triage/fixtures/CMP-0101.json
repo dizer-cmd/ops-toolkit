@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0101",
+  "category": "service_delay",
+  "severity": "high",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "acknowledge_and_investigate",
+  "needs_human_review": true,
+  "review_reasons": [
+    "clock_start_date_ambiguous"
+  ],
+  "summary": "[PERSON_1] has had no update on booking an assessment since first writing on 20 August. Establish whether that letter started the clock, then acknowledge."
+}

@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0107",
+  "category": "process_complaint",
+  "severity": "critical",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "escalate_senior",
+  "needs_human_review": true,
+  "review_reasons": [
+    "clock_may_be_breached"
+  ],
+  "summary": "Sixth letter from [PERSON_1] since July; a written eight-week final response commitment is 71 days old. Treat the deadline as breached until proven otherwise."
+}

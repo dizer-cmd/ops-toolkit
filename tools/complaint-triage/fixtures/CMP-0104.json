@@ -1,0 +1,15 @@
+{
+  "complaint_id": "CMP-0104",
+  "category": "unclear",
+  "severity": "high",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "escalate_legal",
+  "needs_human_review": true,
+  "review_reasons": [
+    "external_escalation_threatened",
+    "clock_may_be_breached"
+  ],
+  "summary": "[PERSON_1] has taken legal advice and will refer to the ombudsman in fourteen days. 62 days since first contact — check the response clock today."
+}

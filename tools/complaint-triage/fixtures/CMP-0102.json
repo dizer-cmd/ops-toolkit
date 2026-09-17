@@ -1,0 +1,14 @@
+{
+  "complaint_id": "CMP-0102",
+  "category": "staff_conduct",
+  "severity": "high",
+  "vulnerability_indicated": false,
+  "regulated_clock_started": true,
+  "redress_sought": false,
+  "next_action": "escalate_senior",
+  "needs_human_review": true,
+  "review_reasons": [
+    "staff_conduct_allegation"
+  ],
+  "summary": "[PERSON_1] alleges the handler on her file talked over her, told her she was wasting his time and ended the call. Conduct allegation, not a service issue."
+}

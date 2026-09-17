@@ -1,0 +1,12 @@
+{
+  "case_id": "CASE-0002",
+  "case_type": "additional_evidence",
+  "priority": "P3",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "evidence_team",
+  "missing_information": [],
+  "needs_human_review": false,
+  "review_reasons": [],
+  "summary": "Occupational health report from [PERSON_1] to be added to the existing file. No other change requested."
+}

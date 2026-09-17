@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0004",
+  "case_type": "complaint",
+  "priority": "P2",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "complaints",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "complaint_detected"
+  ],
+  "summary": "[PERSON_1] is dissatisfied with how the matter has been handled and has asked for it to be escalated. Log as a complaint today."
+}

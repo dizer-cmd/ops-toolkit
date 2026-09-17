@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0008",
+  "case_type": "chase",
+  "priority": "P2",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "intake_team",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "ambiguous_person_reference"
+  ],
+  "summary": "[PERSON_1] was told by phone that an assessment was booked but the letter says otherwise, and wants it confirmed before taking leave."
+}

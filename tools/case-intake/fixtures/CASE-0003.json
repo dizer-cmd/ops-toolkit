@@ -1,0 +1,16 @@
+{
+  "case_id": "CASE-0003",
+  "case_type": "new_claim",
+  "priority": "P3",
+  "client_ref_present": false,
+  "stated_deadline": null,
+  "routing_queue": "intake_team",
+  "missing_information": [
+    "client_reference"
+  ],
+  "needs_human_review": true,
+  "review_reasons": [
+    "client_reference_missing"
+  ],
+  "summary": "First contact from [PERSON_1] opening a claim, no client reference supplied. Needs a file creating or matching before it can be worked."
+}

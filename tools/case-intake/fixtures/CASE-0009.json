@@ -1,0 +1,16 @@
+{
+  "case_id": "CASE-0009",
+  "case_type": "additional_evidence",
+  "priority": "P3",
+  "client_ref_present": true,
+  "stated_deadline": null,
+  "routing_queue": "evidence_team",
+  "missing_information": [
+    "referenced_attachment_absent"
+  ],
+  "needs_human_review": true,
+  "review_reasons": [
+    "referenced_attachment_absent"
+  ],
+  "summary": "[PERSON_1] refers to enclosed wage slips and a GP letter, but nothing is attached. Request the documents before routing."
+}

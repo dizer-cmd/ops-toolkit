@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Complaint triage decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "complaint_id",
+    "category",
+    "severity",
+    "vulnerability_indicated",
+    "regulated_clock_started",
+    "redress_sought",
+    "next_action",
+    "needs_human_review",
+    "review_reasons",
+    "summary"
+  ],
+  "properties": {
+    "complaint_id": { "type": "string", "maxLength": 32 },
+    "category": {
+      "type": "string",
+      "enum": [
+        "service_delay",
+        "service_quality",
+        "staff_conduct",
+        "outcome_dispute",
+        "process_complaint",
+        "data_or_privacy",
+        "unclear"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"]
+    },
+    "vulnerability_indicated": {
+      "type": "boolean",
+      "description": "Any indicator at all. Deliberately sensitive: a false positive costs a conversation, a false negative costs a person."
+    },
+    "regulated_clock_started": { "type": "boolean" },
+    "redress_sought": { "type": "boolean" },
+    "next_action": {
+      "type": "string",
+      "enum": [
+        "acknowledge_and_investigate",
+        "escalate_senior",
+        "escalate_legal",
+        "safeguarding_referral",
+        "data_incident_process",
+        "clarify_with_complainant"
+      ]
+    },
+    "needs_human_review": { "type": "boolean" },
+    "review_reasons": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "maxLength": 100 }
+    },
+    "summary": { "type": "string", "maxLength": 280 }
+  }
+}

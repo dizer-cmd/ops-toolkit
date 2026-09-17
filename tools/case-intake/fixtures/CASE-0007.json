@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-0007",
+  "case_type": "chase",
+  "priority": "P1",
+  "client_ref_present": true,
+  "stated_deadline": "05/03/2026",
+  "routing_queue": "intake_team",
+  "missing_information": [],
+  "needs_human_review": true,
+  "review_reasons": [
+    "contradictory_dates"
+  ],
+  "summary": "[PERSON_1] reports that the response deadline on the letter contradicts the letter's own date. Establish the real deadline before replying."
+}

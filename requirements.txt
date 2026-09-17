@@ -1,0 +1,4 @@
+# The offline demo (`--provider replay`) needs NOTHING but Python 3.10+.
+# These are only for live model runs and stricter validation.
+anthropic>=1.0.0        # live provider
+jsonschema>=4.0.0       # optional: used if importable, stdlib subset validator otherwise
