@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0212",
+  "contact_type": "data_request",
+  "priority": "P2",
+  "route": "data_protection",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "data_protection_request"
+  ],
+  "agent_next_step": "Log the subject access request today; the one-month clock started on 22 October.",
+  "summary": "[PERSON_1] requests a copy of all personal data held, including call recordings."
+}

@@ -211,6 +211,148 @@ COMPLAINT_KEY = [
 ]
 
 
+MEMBERS_OUT = OUT.parent.parent / "member-contact" / "fixtures"
+
+
+def member(cid, contact_type, priority, route, next_step, summary, *,
+           travel=False, vulnerable=False, review=False, reasons=None):
+    return {
+        "contact_id": cid,
+        "contact_type": contact_type,
+        "priority": priority,
+        "route": route,
+        "travel_within_72h": travel,
+        "vulnerability_indicated": vulnerable,
+        "needs_human_review": review,
+        "review_reasons": reasons or [],
+        "agent_next_step": next_step,
+        "summary": summary,
+    }
+
+
+MEMBER_KEY = [
+    # Six that should clear. Without them precision cannot be measured: the
+    # complaint set is all awkward cases, so "flag everything" scores 100% there.
+    member("MBR-0201", "missing_points", "P3", "points_team",
+           "Travel was 18 days ago, past the 7-day window: open a missing points claim "
+           "against booking QX7P2L.",
+           "[PERSON_1] flew Calder Airways CA412 on 2 October and the points have not "
+           "posted."),
+
+    member("MBR-0202", "missing_points", "P4", "self_service_reply",
+           "Stay ended 2 days ago, inside the 7-day posting window: send the standard "
+           "'please allow 7 days' answer.",
+           "[PERSON_1] stayed at Harbourline Hotels Leeds 16 to 18 October and is asking "
+           "why the points have not appeared yet."),
+
+    member("MBR-0203", "general_enquiry", "P4", "self_service_reply",
+           "Send the standard household pooling answer; members at the same address can "
+           "set it up online.",
+           "[PERSON_1] asks whether points can be pooled with a partner at the same "
+           "address."),
+
+    member("MBR-0204", "account_access", "P3", "account_support",
+           "Check the email address on the account and resend the reset link; no travel "
+           "booked.",
+           "[PERSON_1] is not receiving password reset emails and wants to check the "
+           "balance."),
+
+    member("MBR-0205", "points_expiry", "P4", "self_service_reply",
+           "Send the standard expiry answer: any earning or spending before 31 December "
+           "keeps the points.",
+           "[PERSON_1] has 2,400 points due to expire on 31 December and asks how to keep "
+           "them."),
+
+    member("MBR-0206", "holiday_booking", "P3", "holidays_team",
+           "Add airport transfers to the Tenerife package departing 14 March and confirm "
+           "the price before charging.",
+           "[PERSON_1] wants airport transfers added to a Lodestar Holidays package in "
+           "March."),
+
+    # Eleven that must reach a person.
+    member("MBR-0207", "reward_booking", "P1", "reward_bookings",
+           "Correct the surname on the reward booking today; the flight to Malaga leaves "
+           "Thursday 22 October.",
+           "[PERSON_1]'s surname is misspelt on a Northwind Air reward booking departing "
+           "in two days.",
+           travel=True, review=True, reasons=["travel_within_72h"]),
+
+    member("MBR-0208", "account_security", "P1", "security_team",
+           "Lock the account and pass to security now; do not discuss the redemption until "
+           "security has.",
+           "[PERSON_1] reports a 40,000-point hotel redemption in Dubai they did not make.",
+           review=True, reasons=["suspected_account_takeover"]),
+
+    member("MBR-0209", "deceased_member", "P2", "specialist_support",
+           "Bereavement process: offer condolences and explain the transfer to next of "
+           "kin; do not ask for logins.",
+           "[PERSON_2] reports that her husband [PERSON_1], the account holder, died last "
+           "month and asks whether his 90,000 points can move to her.",
+           vulnerable=True, review=True,
+           reasons=["deceased_member_account", "vulnerability_indicated"]),
+
+    # The card number never reaches the model, and never comes back in the
+    # output either. The harness adds payment_card_in_text on its own.
+    member("MBR-0210", "reward_booking", "P3", "reward_bookings",
+           "Check the cancellation and refund the taxes to the original payment method; "
+           "never use card details sent by message.",
+           "[PERSON_1] cancelled a reward flight and asks for £186.40 in taxes back, "
+           "quoting a card number in the message.",
+           review=True, reasons=["payment_card_in_text", "refund_or_compensation_requested"]),
+
+    member("MBR-0211", "complaint", "P2", "complaints",
+           "Log as a complaint today and investigate the Brightcard points for July and "
+           "August.",
+           "[PERSON_1] is chasing Brightcard points for the third time and asks for "
+           "compensation.",
+           review=True, reasons=["complaint_detected", "refund_or_compensation_requested"]),
+
+    member("MBR-0212", "data_request", "P2", "data_protection",
+           "Log the subject access request today; the one-month clock started on 22 "
+           "October.",
+           "[PERSON_1] requests a copy of all personal data held, including call "
+           "recordings.",
+           review=True, reasons=["data_protection_request"]),
+
+    # Age alone is not a vulnerability indicator: a policy choice, recorded as an
+    # open question in TOOL.md. "Mrs Hollis" matches both people on the file,
+    # which the harness flags as an unresolved name.
+    member("MBR-0213", "reward_booking", "P3", "reward_bookings",
+           "Verify the daughter's authority to act for the account holder before "
+           "discussing or booking anything.",
+           "[PERSON_2] writes for her mother [PERSON_1], who wants to book a reward flight "
+           "for another family member in December.",
+           review=True,
+           reasons=["third_party_authority_unverified", "ambiguous_person_reference"]),
+
+    member("MBR-0214", "account_access", "P3", "account_support",
+           "Route for a Spanish-speaking agent or translation; member is locked out and "
+           "has a reward flight next month.",
+           "[PERSON_1] writes in Spanish: locked out since yesterday, reward flight next "
+           "month.",
+           review=True, reasons=["non_english_content"]),
+
+    member("MBR-0215", "data_request", "P2", "data_protection",
+           "Confirm with the member directly before closing the account and starting "
+           "erasure; log the request today.",
+           "[PERSON_1] asks to close the account and have all personal data deleted.",
+           review=True, reasons=["irreversible_request", "data_protection_request"]),
+
+    member("MBR-0216", "reward_booking", "P2", "specialist_support",
+           "Specialist support first: the member cannot afford the taxes and a parent is "
+           "in hospital.",
+           "[PERSON_1] lost her job, cannot afford £300 in taxes on a reward flight to see "
+           "her father in hospital, and asks for help.",
+           vulnerable=True, review=True, reasons=["vulnerability_indicated"]),
+
+    member("MBR-0217", "points_transfer", "P3", "points_team",
+           "Confirm the transfer with the member directly and check both accounts before "
+           "moving any points.",
+           "[PERSON_1] asks to move 20,000 points to his brother's account LS-46672108.",
+           review=True, reasons=["irreversible_request"]),
+]
+
+
 def emit(entries, out_dir, id_key):
     out_dir.mkdir(parents=True, exist_ok=True)
     for entry in entries:
@@ -224,3 +366,4 @@ def emit(entries, out_dir, id_key):
 if __name__ == "__main__":
     emit(KEY, OUT, "case_id")
     emit(COMPLAINT_KEY, COMPLAINTS_OUT, "complaint_id")
+    emit(MEMBER_KEY, MEMBERS_OUT, "contact_id")

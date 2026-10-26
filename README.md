@@ -5,8 +5,9 @@ built so that what works once works identically next Tuesday, in somebody else's
 hands, with an audit trail a governance team will accept.
 
 Two tools are live: **case intake triage** and **complaint and appeal triage**.
-The interesting part is not either prompt. It is the harness around them, and the
-standard both of them have to meet.
+A third, **member contact triage** for a points-based loyalty programme, is in
+pilot. The interesting part is not any one prompt. It is the harness around them,
+and the standard every tool has to meet.
 
 ---
 
@@ -74,8 +75,9 @@ Four properties, enforced in `lib/` rather than asked of each prompt — because
 anything asked of each prompt is eventually forgotten by one of them.
 
 **Identifiers do not leave.** Names, emails, phone numbers, NI numbers,
-postcodes and dates of birth are replaced with stable tokens before the prompt is
-built. The model reasons about `[PERSON_1]`; the operator reads the name. A name
+postcodes, dates of birth and payment card numbers are replaced with stable
+tokens before the prompt is built. A card number is never put back: the case goes
+to a person instead. The model reasons about `[PERSON_1]`; the operator reads the name. A name
 that could mean two different people on file becomes `[PERSON_?]` and the case is
 flagged — the system never guesses which one was meant.
 

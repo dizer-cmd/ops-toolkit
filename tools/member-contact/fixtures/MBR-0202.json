@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0202",
+  "contact_type": "missing_points",
+  "priority": "P4",
+  "route": "self_service_reply",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Stay ended 2 days ago, inside the 7-day posting window: send the standard 'please allow 7 days' answer.",
+  "summary": "[PERSON_1] stayed at Harbourline Hotels Leeds 16 to 18 October and is asking why the points have not appeared yet."
+}

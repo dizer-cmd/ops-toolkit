@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0201",
+  "contact_type": "missing_points",
+  "priority": "P3",
+  "route": "points_team",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Travel was 18 days ago, past the 7-day window: open a missing points claim against booking QX7P2L.",
+  "summary": "[PERSON_1] flew Calder Airways CA412 on 2 October and the points have not posted."
+}

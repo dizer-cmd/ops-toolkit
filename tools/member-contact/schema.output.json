@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Member contact triage decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contact_id",
+    "contact_type",
+    "priority",
+    "route",
+    "travel_within_72h",
+    "vulnerability_indicated",
+    "needs_human_review",
+    "review_reasons",
+    "agent_next_step",
+    "summary"
+  ],
+  "properties": {
+    "contact_id": { "type": "string", "maxLength": 32 },
+    "contact_type": {
+      "type": "string",
+      "enum": [
+        "missing_points",
+        "reward_booking",
+        "points_transfer",
+        "holiday_booking",
+        "account_access",
+        "account_security",
+        "points_expiry",
+        "complaint",
+        "data_request",
+        "deceased_member",
+        "general_enquiry",
+        "unclear"
+      ]
+    },
+    "priority": { "type": "string", "enum": ["P1", "P2", "P3", "P4"] },
+    "route": {
+      "type": "string",
+      "enum": [
+        "self_service_reply",
+        "points_team",
+        "reward_bookings",
+        "holidays_team",
+        "account_support",
+        "security_team",
+        "complaints",
+        "data_protection",
+        "specialist_support"
+      ]
+    },
+    "travel_within_72h": { "type": "boolean" },
+    "vulnerability_indicated": {
+      "type": "boolean",
+      "description": "Any indicator at all. A false positive costs a conversation, a false negative costs a member."
+    },
+    "needs_human_review": { "type": "boolean" },
+    "review_reasons": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "maxLength": 100 }
+    },
+    "agent_next_step": { "type": "string", "maxLength": 200 },
+    "summary": { "type": "string", "maxLength": 280 }
+  }
+}

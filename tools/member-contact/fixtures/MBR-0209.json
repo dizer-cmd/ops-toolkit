@@ -1,0 +1,15 @@
+{
+  "contact_id": "MBR-0209",
+  "contact_type": "deceased_member",
+  "priority": "P2",
+  "route": "specialist_support",
+  "travel_within_72h": false,
+  "vulnerability_indicated": true,
+  "needs_human_review": true,
+  "review_reasons": [
+    "deceased_member_account",
+    "vulnerability_indicated"
+  ],
+  "agent_next_step": "Bereavement process: offer condolences and explain the transfer to next of kin; do not ask for logins.",
+  "summary": "[PERSON_2] reports that her husband [PERSON_1], the account holder, died last month and asks whether his 90,000 points can move to her."
+}

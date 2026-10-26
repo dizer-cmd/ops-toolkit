@@ -23,7 +23,8 @@ API containing:
 - the output schema
 
 It does **not** contain: the raw name, email address, telephone number, National
-Insurance number, postcode or date of birth of any person in the case. Those are
+Insurance number, postcode, date of birth or payment card number of any person in
+the case. Those are
 replaced in `lib/redact.py` before the prompt is assembled, and re-hydrated
 locally from a map that is held in memory for the duration of one case and never
 written to disk.
@@ -39,6 +40,12 @@ Redaction runs in the harness, not in the tools. A tool author cannot forget it.
 | National Insurance number | tokenised, deliberately permissive — a mistyped number is still personal data |
 | Postcode | tokenised |
 | Date of birth | tokenised |
+| Payment card number | tokenised when it passes the Luhn check; **never re-hydrated**, so it cannot reach the run output; the case is flagged `payment_card_in_text` for a human |
+| Membership or client reference | passed through as-is (see residual risks) |
+
+Name fields are tokenised before free text, so a surname written alone in a
+message ("it says OKONJO-B") resolves to the same person as the account holder
+rather than becoming a second one.
 
 Enforced by `tests/test_harness.py::TestRedaction`.
 
@@ -85,6 +92,7 @@ The harness escalates to human review, and can never de-escalate, on:
 | the model declined the request | `lib/runner.py` |
 | the run did not complete | `lib/runner.py` |
 | a person reference could not be resolved | `lib/redact.py` → `lib/runner.py` |
+| a payment card number was found in the case text | `lib/redact.py` → `lib/runner.py` |
 
 Tool-level triggers are listed in each `TOOL.md` under *Escalation policy*.
 Vulnerability, irreversible requests, complaints, possible data breaches and
@@ -143,6 +151,7 @@ Stated, not solved.
 | **Severity judged from tone.** A calm account of a serious failure may be under-rated. | Documented in each `TOOL.md`. Severity never routes anything on its own. |
 | **`days_since_first_contact` taken on trust.** Clock flags are only as good as the export. | Flagged in the runbook. A validation rule against the case system is on the roadmap. |
 | **No duplicate detection.** Each tool sees one row. | Deliberate and visible: `CASE-0011` is an unflagged duplicate in the sample set rather than a faked catch. First roadmap item. |
+| **Membership and client references are passed through.** They identify an account, not a person, to anyone without the member or case database, so they are not redacted. | Accepted for the pilot. Pseudonymous rather than anonymous: revisit before live use if the receiving processor could ever hold the database. |
 | **Operator identity is environment-derived.** `OPSQ_OPERATOR` or the OS username. Not authenticated. | Adequate for attribution in a trusted internal environment; not evidence of identity. Needs SSO before anything contested rests on it. |
 
 ---

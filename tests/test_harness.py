@@ -63,6 +63,45 @@ class TestRedaction(unittest.TestCase):
         r = Redactor(extra_names=["Jane Fairweather"])
         self.assertIn("Janet", r.scrub("Janet was not involved."))
 
+    def test_card_numbers_do_not_survive(self):
+        r = Redactor()
+        for card in ["4111 1111 1111 1111", "4111-1111-1111-1111", "4111111111111111"]:
+            self.assertNotIn("1111", r.scrub(f"Refund it to {card} please."), card)
+
+    def test_card_numbers_are_never_rehydrated(self):
+        """Members paste card numbers into messages. Putting one back into the
+        run output would make the output a place card data is stored."""
+        r = Redactor()
+        out = r.scrub("My card is 4111 1111 1111 1111.")
+        self.assertEqual(r.restore(out), out)
+
+    def test_a_surname_alone_in_the_text_is_the_same_person(self):
+        """MBR-0207 writes her surname alone ("it says OKONJO-B"). When the free
+        text was scrubbed before the name fields, that surname took a token of
+        its own and the model was told about two people."""
+        tool = registry.load("member-contact")
+        row = {r["contact_id"]: r for r in runner.load_rows(ROOT / tool.meta["input"])}["MBR-0207"]
+        seen = {}
+
+        class SpyProvider:
+            name = "test"
+
+            def complete(self, tool, input_id, system, user_prompt):
+                seen["prompt"] = user_prompt
+                return json.loads(tool.fixture(input_id).read_text(encoding="utf-8")), \
+                    {"provider": "test", "model": None, "latency_ms": 0,
+                     "usage": None, "refused": False}
+
+        runner.run_one(tool, row, SpyProvider(), "test-run")
+        self.assertIn("Account holder: [PERSON_1]", seen["prompt"])
+        self.assertIn("[PERSON_1]-B", seen["prompt"])
+        self.assertNotIn("[PERSON_2]", seen["prompt"])
+
+    def test_long_numbers_that_fail_luhn_are_left_alone(self):
+        r = Redactor()
+        text = "Booking 4111 1111 1111 1112 was cancelled."
+        self.assertEqual(r.scrub(text), text)
+
 
 class TestContracts(unittest.TestCase):
     def test_every_fixture_matches_its_schema(self):
@@ -229,6 +268,28 @@ class TestEscalateOnly(unittest.TestCase):
                                 provider_lib.get("replay"), "test-run")
         self.assertTrue(result.needs_review)
         self.assertIn("ambiguous_person_reference", result.reasons)
+
+    def test_card_in_text_forces_review_and_never_reaches_the_model(self):
+        tool = registry.load("member-contact")
+        row = {r["contact_id"]: r for r in runner.load_rows(ROOT / tool.meta["input"])}["MBR-0210"]
+        seen = {}
+
+        class SpyProvider:
+            name = "test"
+
+            def complete(self, tool, input_id, system, user_prompt):
+                seen["prompt"] = user_prompt
+                payload = json.loads(tool.fixture(input_id).read_text(encoding="utf-8"))
+                payload["needs_human_review"] = False
+                payload["review_reasons"] = []
+                return payload, {"provider": "test", "model": None, "latency_ms": 0,
+                                 "usage": None, "refused": False}
+
+        result = runner.run_one(tool, row, SpyProvider(), "test-run")
+        self.assertNotIn("4111", seen["prompt"], "card number reached the model")
+        self.assertTrue(result.needs_review, "a card in the text must reach a person")
+        self.assertIn("payment_card_in_text", result.reasons)
+        self.assertNotIn("4111", json.dumps(result.payload), "card number came back out")
 
 
 class TestAuditLog(unittest.TestCase):

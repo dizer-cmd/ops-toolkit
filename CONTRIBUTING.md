@@ -123,7 +123,9 @@ fixture, and let the score prove it stayed fixed.
 Do not reimplement these in a prompt — they are enforced in `lib/` precisely so
 that no tool can forget them:
 
-- redaction of names, emails, phones, NI numbers, postcodes, dates of birth
-- forced escalation on schema violation, refusal, run failure, unresolved names
+- redaction of names, emails, phones, NI numbers, postcodes, dates of birth and
+  payment card numbers (cards are never re-hydrated)
+- forced escalation on schema violation, refusal, run failure, unresolved names,
+  and a card number in the case text
 - the audit line, with prompt and schema versions
 - output validation against the contract

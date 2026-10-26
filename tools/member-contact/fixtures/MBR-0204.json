@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0204",
+  "contact_type": "account_access",
+  "priority": "P3",
+  "route": "account_support",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Check the email address on the account and resend the reset link; no travel booked.",
+  "summary": "[PERSON_1] is not receiving password reset emails and wants to check the balance."
+}

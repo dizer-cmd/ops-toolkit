@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0208",
+  "contact_type": "account_security",
+  "priority": "P1",
+  "route": "security_team",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "suspected_account_takeover"
+  ],
+  "agent_next_step": "Lock the account and pass to security now; do not discuss the redemption until security has.",
+  "summary": "[PERSON_1] reports a 40,000-point hotel redemption in Dubai they did not make."
+}

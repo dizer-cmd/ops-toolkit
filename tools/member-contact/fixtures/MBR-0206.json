@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0206",
+  "contact_type": "holiday_booking",
+  "priority": "P3",
+  "route": "holidays_team",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Add airport transfers to the Tenerife package departing 14 March and confirm the price before charging.",
+  "summary": "[PERSON_1] wants airport transfers added to a Lodestar Holidays package in March."
+}

@@ -1,0 +1,15 @@
+{
+  "contact_id": "MBR-0213",
+  "contact_type": "reward_booking",
+  "priority": "P3",
+  "route": "reward_bookings",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "third_party_authority_unverified",
+    "ambiguous_person_reference"
+  ],
+  "agent_next_step": "Verify the daughter's authority to act for the account holder before discussing or booking anything.",
+  "summary": "[PERSON_2] writes for her mother [PERSON_1], who wants to book a reward flight for another family member in December."
+}

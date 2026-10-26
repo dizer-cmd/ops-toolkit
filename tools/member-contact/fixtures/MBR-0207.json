@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0207",
+  "contact_type": "reward_booking",
+  "priority": "P1",
+  "route": "reward_bookings",
+  "travel_within_72h": true,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "travel_within_72h"
+  ],
+  "agent_next_step": "Correct the surname on the reward booking today; the flight to Malaga leaves Thursday 22 October.",
+  "summary": "[PERSON_1]'s surname is misspelt on a Northwind Air reward booking departing in two days."
+}

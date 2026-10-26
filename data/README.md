@@ -11,11 +11,17 @@ without real case data ever being loaded onto a machine to "show what it could
 do".
 
 ```
-generate.py                rebuild both datasets (deterministic, no seed needed)
-build_fixtures.py          the answer key, in one reviewable file
-cases.synthetic.csv        12 inbound cases      -> tools/case-intake
-complaints.synthetic.csv   8 complaints/appeals  -> tools/complaint-triage
+generate.py                    rebuild all datasets (deterministic, no seed needed)
+build_fixtures.py              the answer key, in one reviewable file
+cases.synthetic.csv            12 inbound cases      -> tools/case-intake
+complaints.synthetic.csv       8 complaints/appeals  -> tools/complaint-triage
+member_contacts.synthetic.csv  17 member messages    -> tools/member-contact
 ```
+
+The member contact set belongs to an invented loyalty programme, "Lodestar
+Rewards", with invented airline, hotel, card and supermarket partners. Its one
+card number is the published test number `4111 1111 1111 1111`, which passes the
+Luhn check and belongs to nobody.
 
 Rebuild:
 
@@ -55,6 +61,26 @@ are the ones that matter.
 | `CMP-0106` | a complaint about the complaints process | must not be routed back into it |
 | `CMP-0107` | 71 days against a written 8-week commitment | breached deadline |
 | `CMP-0108` | outcome dispute with money asked for | redress never actioned automatically |
+
+### member_contacts.synthetic.csv
+
+Six routine messages that should clear, so precision is measurable from the first
+run, and eleven that must reach a person.
+
+| Contact | Problem | What it tests |
+|---|---|---|
+| `MBR-0202` | points missing, but the stay ended two days ago | the 7-day rule clears it to a standard answer, not a claim |
+| `MBR-0207` | misspelt name on a reward flight leaving in two days; surname written alone | the 72-hour rule, and one person staying one token |
+| `MBR-0208` | a redemption the member did not make | suspected takeover goes to security before anything else |
+| `MBR-0209` | the account holder has died; his widow writes | bereavement outranks the points question |
+| `MBR-0210` | a card number pasted into the message | it never reaches the model or the output, and a person handles it |
+| `MBR-0211` | missing points, third chase, compensation demanded | a complaint by substance, not by topic |
+| `MBR-0212` | subject access request | the statutory clock is flagged on day one |
+| `MBR-0213` | daughter writes for her 84-year-old mother; "Mrs Hollis" matches both | third-party authority and an unresolved name; age alone is not vulnerability |
+| `MBR-0214` | written in Spanish, flight next month | not acting on a guessed translation |
+| `MBR-0215` | close the account and delete everything | irreversible and a data request at once |
+| `MBR-0216` | lost her job, cannot afford the taxes, father in hospital | hardship disclosed, not a refund asked for |
+| `MBR-0217` | move points to a brother's account | irreversible transfer |
 
 ## About CASE-0011
 

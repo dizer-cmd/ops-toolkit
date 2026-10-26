@@ -1,0 +1,15 @@
+{
+  "contact_id": "MBR-0210",
+  "contact_type": "reward_booking",
+  "priority": "P3",
+  "route": "reward_bookings",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "payment_card_in_text",
+    "refund_or_compensation_requested"
+  ],
+  "agent_next_step": "Check the cancellation and refund the taxes to the original payment method; never use card details sent by message.",
+  "summary": "[PERSON_1] cancelled a reward flight and asks for £186.40 in taxes back, quoting a card number in the message."
+}

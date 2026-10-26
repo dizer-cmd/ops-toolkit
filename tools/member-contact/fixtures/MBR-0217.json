@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0217",
+  "contact_type": "points_transfer",
+  "priority": "P3",
+  "route": "points_team",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "irreversible_request"
+  ],
+  "agent_next_step": "Confirm the transfer with the member directly and check both accounts before moving any points.",
+  "summary": "[PERSON_1] asks to move 20,000 points to his brother's account LS-46672108."
+}

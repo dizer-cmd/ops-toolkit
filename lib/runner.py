@@ -29,6 +29,7 @@ HARNESS_REASONS = {
     "model_refusal": "model declined to process this case",
     "ambiguous_person_reference": "a name in the case matches more than one person on file",
     "provider_error": "the run did not complete",
+    "payment_card_in_text": "a payment card number was removed from the case before egress",
 }
 
 
@@ -64,13 +65,16 @@ def run_one(tool, row: dict, provider, run_id: str) -> Result:
     names = [row[f] for f in tool.field_list("name_fields") if row.get(f)]
     redactor = Redactor(extra_names=names)
 
-    text_fields = set(tool.field_list("text_fields"))
-    scrubbed = {
-        k: (redactor.scrub(v) if k in text_fields and isinstance(v, str) else v)
-        for k, v in row.items()
-    }
+    # Name fields first, so each full name claims its token before the free text
+    # is read. The other way round, a surname written alone in the text ("it says
+    # OKONJO-B") took a token of its own, and the same person reached the model
+    # as two people.
+    scrubbed = dict(row)
     for f in tool.field_list("name_fields"):
         if scrubbed.get(f):
+            scrubbed[f] = redactor.scrub(scrubbed[f])
+    for f in tool.field_list("text_fields"):
+        if isinstance(scrubbed.get(f), str):
             scrubbed[f] = redactor.scrub(scrubbed[f])
 
     # Harness-supplied values are not case data. The escalation policy comes
@@ -102,6 +106,11 @@ def run_one(tool, row: dict, provider, run_id: str) -> Result:
 
     if redactor.ambiguous_hits:
         reasons.append("ambiguous_person_reference")
+
+    # The card never reached the model, but it arrived in the case. Handling it
+    # is a data matter for a person, whatever the model made of the rest.
+    if redactor.counts().get("CARD"):
+        reasons.append("payment_card_in_text")
 
     reasons += [r for r in payload.get("review_reasons", []) if r not in reasons]
     # Escalate-only: the model's own flag can raise this, never lower it.

@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0216",
+  "contact_type": "reward_booking",
+  "priority": "P2",
+  "route": "specialist_support",
+  "travel_within_72h": false,
+  "vulnerability_indicated": true,
+  "needs_human_review": true,
+  "review_reasons": [
+    "vulnerability_indicated"
+  ],
+  "agent_next_step": "Specialist support first: the member cannot afford the taxes and a parent is in hospital.",
+  "summary": "[PERSON_1] lost her job, cannot afford £300 in taxes on a reward flight to see her father in hospital, and asks for help."
+}

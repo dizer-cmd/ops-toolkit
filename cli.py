@@ -304,6 +304,9 @@ def cmd_audit(args):
 
 
 def main():
+    # A Windows console on a legacy code page cannot print "£" and the run would
+    # die halfway through the table. Print what it can and substitute the rest.
+    sys.stdout.reconfigure(errors="replace")
     p = argparse.ArgumentParser(
         prog="opsq",
         description=__doc__,

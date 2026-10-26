@@ -1,0 +1,15 @@
+{
+  "contact_id": "MBR-0215",
+  "contact_type": "data_request",
+  "priority": "P2",
+  "route": "data_protection",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "irreversible_request",
+    "data_protection_request"
+  ],
+  "agent_next_step": "Confirm with the member directly before closing the account and starting erasure; log the request today.",
+  "summary": "[PERSON_1] asks to close the account and have all personal data deleted."
+}

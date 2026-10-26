@@ -1,0 +1,15 @@
+{
+  "contact_id": "MBR-0211",
+  "contact_type": "complaint",
+  "priority": "P2",
+  "route": "complaints",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "complaint_detected",
+    "refund_or_compensation_requested"
+  ],
+  "agent_next_step": "Log as a complaint today and investigate the Brightcard points for July and August.",
+  "summary": "[PERSON_1] is chasing Brightcard points for the third time and asks for compensation."
+}

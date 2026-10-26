@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0203",
+  "contact_type": "general_enquiry",
+  "priority": "P4",
+  "route": "self_service_reply",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Send the standard household pooling answer; members at the same address can set it up online.",
+  "summary": "[PERSON_1] asks whether points can be pooled with a partner at the same address."
+}

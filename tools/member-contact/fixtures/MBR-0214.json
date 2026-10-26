@@ -1,0 +1,14 @@
+{
+  "contact_id": "MBR-0214",
+  "contact_type": "account_access",
+  "priority": "P3",
+  "route": "account_support",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": true,
+  "review_reasons": [
+    "non_english_content"
+  ],
+  "agent_next_step": "Route for a Spanish-speaking agent or translation; member is locked out and has a reward flight next month.",
+  "summary": "[PERSON_1] writes in Spanish: locked out since yesterday, reward flight next month."
+}

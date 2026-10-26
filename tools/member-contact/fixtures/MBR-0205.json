@@ -1,0 +1,12 @@
+{
+  "contact_id": "MBR-0205",
+  "contact_type": "points_expiry",
+  "priority": "P4",
+  "route": "self_service_reply",
+  "travel_within_72h": false,
+  "vulnerability_indicated": false,
+  "needs_human_review": false,
+  "review_reasons": [],
+  "agent_next_step": "Send the standard expiry answer: any earning or spending before 31 December keeps the points.",
+  "summary": "[PERSON_1] has 2,400 points due to expire on 31 December and asks how to keep them."
+}

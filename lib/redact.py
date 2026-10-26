@@ -11,7 +11,8 @@ review asks about first, so it is enforced in the harness rather than left to
 each tool to remember.
 
 Scope, stated plainly: this handles *direct* identifiers -- name, email, phone,
-NI number, postcode, date of birth. It does not attempt to defeat
+NI number, postcode, date of birth -- plus payment card numbers, which customers
+paste into messages whatever the form tells them. It does not attempt to defeat
 re-identification from free text ("the lady who rang about the Tuesday
 delivery"). That residual risk is recorded in GOVERNANCE.md rather than hidden
 behind a regex.
@@ -29,6 +30,19 @@ NINO = re.compile(r"\b[A-Z]{2}\s?\d{2}\s?\d{2}\s?\d{2}\s?[A-D]\b", re.IGNORECASE
 PHONE = re.compile(r"(?<!\d)(?:\+44\s?|0)(?:\d\s?){9,10}(?!\d)")
 POSTCODE = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b", re.IGNORECASE)
 DOB = re.compile(r"\b(?:0?[1-9]|[12]\d|3[01])[/.-](?:0?[1-9]|1[0-2])[/.-](?:19|20)\d{2}\b")
+# 13 to 19 digits, optionally grouped by spaces or hyphens. Only runs that pass
+# the Luhn check are treated as cards, so a long reference number is left alone.
+CARD = re.compile(r"(?<!\d)\d(?:[ -]?\d){12,18}(?!\d)")
+
+
+def luhn_ok(digits: str) -> bool:
+    total = 0
+    for i, ch in enumerate(reversed(digits)):
+        d = int(ch)
+        if i % 2:
+            d = d * 2 - 9 if d > 4 else d * 2
+        total += d
+    return total % 10 == 0
 
 # Order matters. Email goes first: an address contains a name, and redacting the
 # name first would shred the address into fragments that no longer look like one.
@@ -101,8 +115,14 @@ class Redactor:
                     terms.add(word)
         return sorted(terms, key=len, reverse=True)
 
+    def _card(self, m: re.Match) -> str:
+        digits = re.sub(r"\D", "", m.group(0))
+        return self._token("CARD", m.group(0)) if luhn_ok(digits) else m.group(0)
+
     def scrub(self, text: str) -> str:
         out = EMAIL.sub(lambda m: self._token("EMAIL", m.group(0)), text)
+        # Before the phone pattern, so a card is never half-claimed as a number.
+        out = CARD.sub(self._card, out)
         for name in self._terms():
             out = re.sub(
                 rf"\b{re.escape(name)}\b",
@@ -125,6 +145,10 @@ class Redactor:
     def restore(self, text: str) -> str:
         out = text
         for token, original in self.map.items():
+            # A card number is never re-hydrated. Nobody downstream of triage
+            # needs it, and putting it back would write it into the run output.
+            if token.startswith("[CARD_"):
+                continue
             out = out.replace(token, original)
         return out
 
